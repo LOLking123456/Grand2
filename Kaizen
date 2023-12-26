@@ -4,7 +4,7 @@ local OwO = library:Window("Grand Kaizen")
 
 
 
-OwO:Toggle("AutoFarm (Nearest Enemies)", false, function(Value)
+OwO:Toggle("AutoFarm (Nearest)", false, function(Value)
 
  a = Value
         while a do task.wait()
@@ -22,7 +22,7 @@ local char_root = char:FindFirstChild("HumanoidRootPart")
     local target_root
     local target_hum
 
-    for i, v in pairs(workspace.Live.Enemies:GetDescendants()) do
+    for i, v in pairs(workspace.World.Live.Enemies:GetDescendants()) do
         local root = v:FindFirstChild("HumanoidRootPart")
         local hum = v:FindFirstChild("Humanoid")
 
