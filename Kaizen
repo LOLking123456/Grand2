@@ -73,7 +73,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild(
 end
 end)
 
-OwO:Slider("Walkspeed",16,100,16, function(s)
+OwO:Slider("Walkspeed",16,40,16, function(s)
   getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
 local Player = game:service'Players'.LocalPlayer;
 Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
