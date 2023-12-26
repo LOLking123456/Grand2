@@ -29,7 +29,7 @@ local char_root = char:FindFirstChild("HumanoidRootPart")
         if root and hum and v ~= char then
             local mag = (char_root.Position - root.Position).magnitude
 
-            if mag < 150 and mag < nearest_hum then
+            if mag < 40 and mag < nearest_hum then
 
                 local obstructed = false
 
@@ -161,7 +161,7 @@ end
 end
 end)
 
-OwO:Slider("Walkspeed",16,100,16, function(s)
+OwO:Slider("Walkspeed",16,40,16, function(s)
   getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
 local Player = game:service'Players'.LocalPlayer;
 Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
