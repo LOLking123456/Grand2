@@ -1,0 +1,99 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/turtle"))()
+
+local OwO = library:Window("Rawr")
+
+OwO:Button("Button name", function()
+   print("pressed button")
+end)
+
+OwO:Toggle("Auto Attack (Light)", false, function(Value)
+        a = Value
+        while a do task.wait()
+        pcall(function()
+local args = {
+    [1] = "CombatConnection",
+    [2] = "RegisterAttack",
+    [3] = {
+        ["AttackType"] = "Light"
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CommunicationEvent_4904421936"):FireServer(unpack(args))
+
+
+        end)
+        end
+end)
+
+
+OwO:Toggle("Auto Attack (Heavy)", false, function(Value)
+        a = Value
+        while a do task.wait()
+        pcall(function()
+local args = {
+    [1] = "CombatConnection",
+    [2] = "RegisterAttack",
+    [3] = {
+        ["AttackType"] = "Light"
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CommunicationEvent_4904421936"):FireServer(unpack(args))
+
+
+        end)
+        end
+end)
+
+
+OwO:Toggle("Auto Block", false, function(state)
+if state then
+local args = {
+    [1] = "CombatConnection",
+    [2] = "Block",
+    [3] = {
+        ["State"] = true
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CommunicationEvent_4904421936"):FireServer(unpack(args))
+
+
+else
+
+local args = {
+    [1] = "CombatConnection",
+    [2] = "Block",
+    [3] = {
+        ["State"] = false
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CommunicationEvent_4904421936"):FireServer(unpack(args))
+end
+end)
+
+OwO:Slider("Walkspeed",16,100,16, function(s)
+  getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
+local Player = game:service'Players'.LocalPlayer;
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end)
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end)
+
+OwO:Label("Credits to Intrer#0421", Color3.fromRGB(127, 143, 166))
+
+OwO:Box("Walkspeed", function(text, focuslost)
+   if focuslost then
+   print(text)
+   end
+end)
+
+local dropdown = OwO:Dropdown("Example dropdown", {"Button 1", "Button 2", "Third button"}, function(name)
+   print(name)
+end)
+
+dropdown:Button("New button")
+
+dropdown:Remove("Button")
