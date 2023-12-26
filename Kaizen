@@ -64,6 +64,7 @@ local char_root = char:FindFirstChild("HumanoidRootPart")
 end)
 end
 end)
+
 OwO:Toggle("Auto Attack (Light)", false, function(Value)
         a = Value
         while a do task.wait()
@@ -92,7 +93,7 @@ local args = {
     [1] = "CombatConnection",
     [2] = "RegisterAttack",
     [3] = {
-        ["AttackType"] = "Light"
+        ["AttackType"] = "Heavy"
     }
 }
 
@@ -103,6 +104,23 @@ game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild(
         end
 end)
 
+
+OwO:Toggle("Enemies Hitbox", false, function(Value)
+        a = Value
+        while a do task.wait()
+        pcall(function()
+for _, v in pairs(game.Workspace:GetDescendants()) do
+    if v.Name == "HumanoidRootPart" and v:IsA("Part") and v.Parent ~= game.Players.LocalPlayer.Character then
+        v.Size = Vector3.new(25, 25, 25)
+        v.Transparency = 0.8
+        v.Material = "Neon"
+        v.BrickColor = BrickColor.new("Really red")
+        v.CanCollide = false
+    end
+end
+end)
+        end
+end)
 
 OwO:Toggle("Auto Block", false, function(state)
 if state then
