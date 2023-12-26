@@ -1,11 +1,69 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/turtle"))()
 
-local OwO = library:Window("Rawr")
+local OwO = library:Window("Grand Kaizen")
 
-OwO:Button("Button name", function()
-   print("pressed button")
+
+
+OwO:Toggle("AutoFarm (Nearest Enemies)", false, function(Value)
+
+ a = Value
+        while a do task.wait()
+        pcall(function()
+local player = game.Players.LocalPlayer
+
+
+wait() -- load character
+
+local char = player.Character
+local char_root = char:FindFirstChild("HumanoidRootPart")
+
+    local nearest_hum = math.huge
+
+    local target_root
+    local target_hum
+
+    for i, v in pairs(workspace.Live.Enemies:GetDescendants()) do
+        local root = v:FindFirstChild("HumanoidRootPart")
+        local hum = v:FindFirstChild("Humanoid")
+
+        if root and hum and v ~= char then
+            local mag = (char_root.Position - root.Position).magnitude
+
+            if mag < 150 and mag < nearest_hum then
+
+                local obstructed = false
+
+                local ray = Ray.new(char_root.Position, (root.Position - char_root.Position).unit * 20)
+
+                local part = workspace:FindPartOnRay(ray, char, false, true)
+
+                if part then
+                    if part.Parent ~= v then
+                        obstructed = true
+                    end
+                end
+
+                if obstructed == false then
+                    nearest_hum = mag
+                    target_root = root
+                    target_hum = hum
+                end
+            end
+        end
+    end
+
+    if target_root and target_hum then
+        nearest_hum = math.huge
+
+        local behind = (target_root.CFrame *  CFrame.new(0,4,0)).p -- the behind lol
+
+        char_root.CFrame = CFrame.new(behind)
+
+        target_hum:TakeDamage()
+    end
 end)
-
+end
+end)
 OwO:Toggle("Auto Attack (Light)", false, function(Value)
         a = Value
         while a do task.wait()
@@ -73,7 +131,19 @@ game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild(
 end
 end)
 
-OwO:Slider("Walkspeed",16,40,16, function(s)
+OwO:Button("FPS Booster", function()
+       for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.Material = "Plastic"
+end
+end
+end)
+
+OwO:Slider("Walkspeed",16,100,16, function(s)
   getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
 local Player = game:service'Players'.LocalPlayer;
 Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
@@ -82,18 +152,6 @@ end)
 Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
 end)
 
-OwO:Label("Credits to Intrer#0421", Color3.fromRGB(127, 143, 166))
+OwO:Label("Credits to Legend Handles", Color3.fromRGB(127, 143, 166))
 
-OwO:Box("Walkspeed", function(text, focuslost)
-   if focuslost then
-   print(text)
-   end
-end)
 
-local dropdown = OwO:Dropdown("Example dropdown", {"Button 1", "Button 2", "Third button"}, function(name)
-   print(name)
-end)
-
-dropdown:Button("New button")
-
-dropdown:Remove("Button")
